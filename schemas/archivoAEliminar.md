@@ -1,1 +1,0 @@
-//eliminar archivo, solo se creo para que no se borre la carpeta al subirlo al git.
