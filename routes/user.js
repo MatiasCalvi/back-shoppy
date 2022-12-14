@@ -1,6 +1,6 @@
 let router = require("express").Router();
 const validator = require("../middlewares/validator");
-const schema = require("../schemas/user");
+const {schemaPost, schemaPatch} = require("../schemas/user");
 let {
   register,
   verify,
@@ -19,7 +19,7 @@ const {
 const passport = require("../middlewares/passport");
 const mustSignIn = require("../middlewares/mustSignIn");
 
-router.post("/signup", validator(schema), accountExists, register);
+router.post("/signup", validator(schemaPost), accountExists, register);
 router.get("/verify/:code", verify);
 
 router.post(
@@ -41,7 +41,17 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   signOut
 );
-router.get("/me/:id", readOne);
-router.patch("/me/:id", update);
+router.get(
+  "/me",
+  validator(schemaPatch),
+  passport.authenticate("jwt", { session: false }),
+  readOne
+);
+router.patch(
+  "/me",
+  validator(schemaPatch),
+  passport.authenticate("jwt", { session: false }),
+  update
+);
 
 module.exports = router;

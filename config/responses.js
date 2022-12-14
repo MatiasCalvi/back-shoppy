@@ -61,6 +61,13 @@ function noActivity(req, res) {
   });
 }
 
+function isNotAdmin(req, res) {
+  return res.status(401).json({
+    success: false,
+    message: "You must be an admin to do this operation",
+  });
+}
+
 module.exports = {
   userSignedUpResponse,
   userExistsResponse,
@@ -71,4 +78,5 @@ module.exports = {
   verifyResponse,
   isNotCommentOwner,
   noActivity,
+  isNotAdmin,
 };
