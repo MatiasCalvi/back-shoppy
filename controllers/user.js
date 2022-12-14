@@ -13,7 +13,8 @@ const jwt = require("jsonwebtoken");
 
 const controller = {
   register: async (req, res, next) => {
-    let { name, lastName, role, photo, age, email, password } = req.body;
+    let { name, lastName, dni, adress, role, photo, age, email, password } =
+      req.body;
     let code = crypto.randomBytes(10).toString("hex");
     let verified = false;
     let logged = false;
@@ -30,6 +31,8 @@ const controller = {
         code,
         verified,
         logged,
+        dni,
+        adress,
       });
       await accountVerificationEmail(email, code);
       return userSignedUpResponse(req, res);
@@ -76,8 +79,23 @@ const controller = {
           process.env.KEY_JWT,
           { expiresIn: 60 * 60 * 24 }
         );
+        let userAux = {
+          name: user.name,
+          lastName: user.lastName,
+          dni: user.dni,
+          adress: user.adress,
+          role: user.role,
+          photo: user.photo,
+          age: user.age,
+          email: user.email,
+          logged: user.logged,
+          products: user.products,
+        };
         return res.status(200).json({
-          response: { user, token },
+          response: {
+            user: userAux,
+            token,
+          },
           success: true,
           message: "Welcome " + user.name,
         });
@@ -91,13 +109,11 @@ const controller = {
     let { user } = req;
     try {
       return res.json({
-        user: {
-          response: {
-            name: user.name,
-            photo: user.photo,
-            role: user.role,
-            logged: user.logged,
-          },
+        response: {
+          name: user.name,
+          photo: user.photo,
+          role: user.role,
+          logged: user.logged,
         },
         succes: true,
         message: "Welcome " + user.name,
@@ -120,14 +136,26 @@ const controller = {
     }
   },
   readOne: async (req, res, next) => {
-    let id = req.params.id;
+    const { _id } = req.user;
     try {
-      let user = await User.findById({ _id: id });
+      let user = await User.findById({ _id: _id });
+      let userAux = {
+        name: user.name,
+        lastName: user.lastName,
+        dni: user.dni,
+        adress: user.adress,
+        role: user.role,
+        photo: user.photo,
+        age: user.age,
+        email: user.email,
+        logged: user.logged,
+        products: user.products,
+      };
       if (user) {
         res.status(200).json({
           success: true,
           message: "user founded",
-          response: user,
+          response: userAux,
         });
       } else {
         res.status(404).json({
@@ -140,14 +168,14 @@ const controller = {
     }
   },
   update: async (req, res, next) => {
-    let id = req.params.id;
+    const { _id } = req.user;
     if (req.body.password) {
-      let { password } = req.body;
+      let { password } = req.user;
       password = bcryptjs.hashSync(password, 10);
       req.body.password = password;
     }
     try {
-      let user = await User.findOneAndUpdate({ _id: id }, req.body, {
+      let user = await User.findOneAndUpdate({ _id: _id }, req.body, {
         new: true,
       });
       if (user) {
