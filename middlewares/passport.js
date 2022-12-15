@@ -19,10 +19,12 @@ passport.use(
             name: user.name,
             lastName: user.lastName,
             role: user.role,
+            logged: user.logged,
             photo: user.photo,
             age: user.age,
             email: user.email,
             password: user.password,
+            products: user.products,
           };
           return done(null, user);
         } else {
