@@ -63,7 +63,11 @@ const schemaPost = joi.object({
   }),
   products: joi.array().required().messages({
     "any.required": "Products is required",
-    "array.base": "Products must be an array"
+    "array.base": "Products must be an array",
+  }),
+  favorites: joi.array().required().messages({
+    "any.required": "Favorites is required",
+    "array.base": "Favorites must be an array",
   }),
 });
 
@@ -129,7 +133,11 @@ const schemaPatch = joi.object({
   }),
   products: joi.array().messages({
     "any.required": "Products is required",
-    "array.base": "Products must be an array"
+    "array.base": "Products must be an array",
+  }),
+  favorites: joi.array().messages({
+    "any.required": "Favorites is required",
+    "array.base": "Favorites must be an array",
   }),
 });
 

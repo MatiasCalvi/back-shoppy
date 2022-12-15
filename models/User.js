@@ -25,6 +25,12 @@ const schema = new mongoose.Schema({
     ],
     required: true,
   },
+  favorites: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "products",
+    },
+  ],
 });
 
 const User = mongoose.model("users", schema);

@@ -13,8 +13,19 @@ const jwt = require("jsonwebtoken");
 
 const controller = {
   register: async (req, res, next) => {
-    let { name, lastName, dni, adress, role, photo, age, email, password } =
-      req.body;
+    let {
+      name,
+      lastName,
+      dni,
+      adress,
+      role,
+      photo,
+      age,
+      email,
+      password,
+      products,
+      favorites,
+    } = req.body;
     let code = crypto.randomBytes(10).toString("hex");
     let verified = false;
     let logged = false;
@@ -23,6 +34,8 @@ const controller = {
       await User.create({
         name,
         lastName,
+        dni,
+        adress,
         role,
         photo,
         age,
@@ -31,8 +44,8 @@ const controller = {
         code,
         verified,
         logged,
-        dni,
-        adress,
+        products,
+        favorites,
       });
       await accountVerificationEmail(email, code);
       return userSignedUpResponse(req, res);
@@ -90,6 +103,7 @@ const controller = {
           email: user.email,
           logged: user.logged,
           products: user.products,
+          favorites: user.favorites,
         };
         return res.status(200).json({
           response: {
@@ -150,6 +164,7 @@ const controller = {
         email: user.email,
         logged: user.logged,
         products: user.products,
+        favorites: user.favorites,
       };
       if (user) {
         res.status(200).json({
