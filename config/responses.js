@@ -34,16 +34,16 @@ function mustSignInResponse(req, res) {
 }
 
 function invalidCredentialsResponse(req, res) {
-  return res.status(401).json({
+  return res.status(200).json({
     success: false,
-    message: "Email or password incorrect",
+    message: ["Email or password incorrect"],
   });
 }
 
 function verifyResponse(req, res) {
-  return res.status(401).json({
+  return res.status(200).json({
     success: false,
-    message: "Please, verify your email account and try again",
+    message: ["Please, verify your email account and try again"],
   });
 }
 
