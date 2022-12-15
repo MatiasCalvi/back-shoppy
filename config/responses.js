@@ -1,7 +1,7 @@
 function userExistsResponse(req, res) {
-  return res.status(400).json({
+  return res.status(200).json({
     success: false,
-    message: "User already exists",
+    message: ["User already exists"],
   });
 }
 
