@@ -28,12 +28,12 @@ const schemaPost = joi.object({
     "string.min": "Brand must have at least 3 characters",
     "string.max": "Brand must not have more than 30 characters",
   }),
-  price: joi.number().required().messages({
+  price: joi.number().required().min(0).messages({
     "number.base": "Price must be a number",
     "any.required": "Price is required",
     "number.empty": "The price must not be empty",
   }),
-  stock: joi.number().required().messages({
+  stock: joi.number().required().min(0).messages({
     "number.base": "Stock must be a number",
     "any.required": "Stock is required",
     "number.empty": "The stock must not be empty",
@@ -76,12 +76,12 @@ const schemaPut = joi.object({
     "string.min": "Brand must have at least 3 characters",
     "string.max": "Brand must not have more than 30 characters",
   }),
-  price: joi.number().messages({
+  price: joi.number().min(0).messages({
     "number.base": "Price must be a number",
     "any.required": "Price is required",
     "number.empty": "The price must not be empty",
   }),
-  stock: joi.number().messages({
+  stock: joi.number().min(0).messages({
     "number.base": "Stock must be a number",
     "any.required": "Stock is required",
     "number.empty": "The stock must not be empty",

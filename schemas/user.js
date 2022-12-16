@@ -54,7 +54,7 @@ const schemaPost = joi.object({
       "string.empty": "The email must not be empty",
       "string.email": "Email must be a valid email",
     }),
-  password: joi.string().required().messages({
+  password: joi.string().required().min(6).messages({
     "string.base": "Password must be a text",
     "any.required": "Password is required",
     "string.empty": "The password must not be empty",
@@ -124,7 +124,7 @@ const schemaPatch = joi.object({
       "string.empty": "The email must not be empty",
       "string.email": "Email must be a valid email",
     }),
-  password: joi.string().messages({
+  password: joi.string().min(6).messages({
     "string.base": "Password must be a text",
     "any.required": "Password is required",
     "string.empty": "The password must not be empty",
