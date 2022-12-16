@@ -50,9 +50,19 @@ const controller = {
     if (req.query.minPrice) {
       minPrice = req.query.minPrice;
     }
+
     if (req.query.maxPrice) {
       maxPrice = req.query.maxPrice;
     }
+
+    if (req.query.brand) {
+      query = {
+        ...query,
+        brand: req.query.brand,
+      };
+    }
+
+    
     try {
       let products = await Product.find(query)
         .sort(order)
