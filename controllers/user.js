@@ -29,7 +29,22 @@ const controller = {
     let code = crypto.randomBytes(10).toString("hex");
     let verified = false;
     let logged = false;
+    let dateOriginal = new Date();
+
+    function formatoFecha(fecha, formato) {
+          const map = {
+            dd: fecha.getDate(),
+            mm: fecha.getMonth() + 1,
+            yy: fecha.getFullYear().toString().slice(-2),
+            yyyy: fecha.getFullYear()
+        }
+
+        return formato.replace(/dd|mm|yy|yyy/gi, matched => map[matched])
+    }
+
+    let date = formatoFecha(dateOriginal, 'dd/mm/yy');
     password = bcryptjs.hashSync(password, 10);
+
     try {
       await User.create({
         name,
@@ -46,6 +61,7 @@ const controller = {
         logged,
         products,
         favorites,
+        date
       });
       await accountVerificationEmail(email, code);
       return userSignedUpResponse(req, res);
@@ -104,6 +120,7 @@ const controller = {
           logged: user.logged,
           products: user.products,
           favorites: user.favorites,
+          date: user.date
         };
         return res.status(200).json({
           response: {
@@ -125,9 +142,17 @@ const controller = {
       return res.json({
         response: {
           name: user.name,
-          photo: user.photo,
+          lastName: user.lastName,
+          dni: user.dni,
+          adress: user.adress,
           role: user.role,
+          photo: user.photo,
+          age: user.age,
+          email: user.email,
           logged: user.logged,
+          products: user.products,
+          favorites: user.favorites,
+          date: user.date
         },
         succes: true,
         message: "Welcome " + user.name,
@@ -160,6 +185,7 @@ const controller = {
         adress: user.adress,
         role: user.role,
         photo: user.photo,
+        date: user.date,
         age: user.age,
         email: user.email,
         logged: user.logged,

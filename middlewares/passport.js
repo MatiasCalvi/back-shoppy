@@ -14,18 +14,6 @@ passport.use(
       try {
         let user = await User.findOne({ _id: jwt_payload.id });
         if (user) {
-          user = {
-            _id: user._id,
-            name: user.name,
-            lastName: user.lastName,
-            role: user.role,
-            logged: user.logged,
-            photo: user.photo,
-            age: user.age,
-            email: user.email,
-            password: user.password,
-            products: user.products,
-          };
           return done(null, user);
         } else {
           return done(null, false);

@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
   code: { type: String, required: true },
   verified: { type: Boolean, required: true },
   logged: { type: Boolean, required: true },
+  date: {type: String},
   products: {
     type: [
       {
