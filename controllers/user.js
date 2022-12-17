@@ -224,6 +224,7 @@ const controller = {
           success: true,
           message: "user updated",
           response: user,
+          id: user._id,
         });
       } else {
         res.status(404).json({
