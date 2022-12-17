@@ -211,7 +211,7 @@ const controller = {
   update: async (req, res, next) => {
     const { _id } = req.user;
     if (req.body.password) {
-      let { password } = req.user;
+      let { password } = req.body;
       password = bcryptjs.hashSync(password, 10);
       req.body.password = password;
     }
