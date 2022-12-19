@@ -1,19 +1,22 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
+  nick: { type: String, required: true },
   name: { type: String, required: true },
   lastName: { type: String, required: true },
   dni: { type: Number, required: true },
   adress: { type: String, required: true },
+  cp: { type: String, required: true },
   role: { type: String, required: true },
   photo: { type: String },
   age: { type: Number, required: true },
   email: { type: String, required: true },
+  phone: { type: String, required: true },
   password: { type: String, required: true },
   code: { type: String, required: true },
   verified: { type: Boolean, required: true },
   logged: { type: Boolean, required: true },
-  date: {type: String},
+  date: { type: String },
   products: {
     type: [
       {
@@ -32,6 +35,7 @@ const schema = new mongoose.Schema({
       ref: "products",
     },
   ],
+  coins: { type: Number, required: true },
 });
 
 const User = mongoose.model("users", schema);
