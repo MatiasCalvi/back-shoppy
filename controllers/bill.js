@@ -2,22 +2,31 @@ const Bill = require("../models/Bill");
 
 const controller = {
   create: async (req, res, next) => {
-    req.body = {
-      userId: req.user._id,
-      date: Date.now(),
-      products: req.user.products,
-    };
-    try {
-      let newBill = await Bill.create(req.body);
-      res.status(201).json({
-        response: newBill,
-        success: true,
-        message: "Bill created",
-      });
-    } catch (error) {
+    if (req.user.products.length > 0) {
+      req.body = {
+        userId: req.user._id,
+        date: Date.now(),
+        products: req.user.products,
+        totalPrice: req.body.totalPrice,
+        coins: req.body.totalPrice * 0.02,
+      };
+      try {
+        let newBill = await Bill.create(req.body);
+        res.status(201).json({
+          response: newBill,
+          success: true,
+          message: "Factura creada",
+        });
+      } catch (error) {
+        res.status(400).json({
+          success: false,
+          message: error.message,
+        });
+      }
+    } else {
       res.status(400).json({
         success: false,
-        message: error.message,
+        message: "No hay productos para crear una factura",
       });
     }
   },
@@ -34,12 +43,12 @@ const controller = {
         res.status(200).json({
           response: bill,
           success: true,
-          message: "Bill/s founded",
+          message: "Factura/s encontradas",
         });
       } else {
         res.status(404).json({
           success: false,
-          message: "Bill/s not founded",
+          message: "Factura/s no encontradas",
         });
       }
     } catch (error) {
@@ -56,13 +65,13 @@ const controller = {
       if (bill) {
         res.status(200).json({
           success: true,
-          message: "Bill founded",
+          message: "Factura/s encontradas",
           response: bill,
         });
       } else {
         res.status(404).json({
           success: false,
-          message: "Bill not founded",
+          message: "Factura/s no encontradas",
         });
       }
     } catch (error) {
@@ -79,13 +88,13 @@ const controller = {
       if (bill) {
         res.status(200).json({
           success: true,
-          message: "Bill deleted",
+          message: "Factura eliminada",
           response: bill,
         });
       } else {
         res.status(404).json({
           success: false,
-          message: "Bill not found",
+          message: "Factura no encontrada",
         });
       }
     } catch (error) {
