@@ -7,7 +7,6 @@ const controller = {
       date: Date.now(),
       products: req.user.products,
     };
-    console.log(req.body)
     try {
       let newBill = await Bill.create(req.body);
       res.status(201).json({

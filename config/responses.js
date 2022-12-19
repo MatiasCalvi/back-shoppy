@@ -68,6 +68,13 @@ function isNotAdmin(req, res) {
   });
 }
 
+function passwordNotMatch(req, res) {
+  return res.status(400).json({
+    success: false,
+    message: "La contraseña es errónea",
+  });
+}
+
 module.exports = {
   userSignedUpResponse,
   userExistsResponse,
@@ -79,4 +86,5 @@ module.exports = {
   isNotCommentOwner,
   noActivity,
   isNotAdmin,
+  passwordNotMatch,
 };
