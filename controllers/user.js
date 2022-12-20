@@ -34,7 +34,7 @@ const controller = {
     let logged = false;
     let dateOriginal = new Date();
     let coins = 0;
-
+    let nameDni=''
     function formatoFecha(fecha, formato) {
       const map = {
         dd: fecha.getDate(),
@@ -52,6 +52,7 @@ const controller = {
     try {
       await User.create({
         nick,
+        nameDni,
         name,
         lastName,
         dni,
@@ -169,6 +170,7 @@ const controller = {
           cp: user.cp,
           nick: user.nick,
           coins: user.coins,
+          nameDni: user.nameDni,
         },
         succes: true,
         message: "Welcome " + user.name,
@@ -196,6 +198,7 @@ const controller = {
       let user = await User.findById({ _id: _id }).populate("products.productId");
       let userAux = {
         name: user.name,
+        nameDni: user.coins,
         lastName: user.lastName,
         dni: user.dni,
         adress: user.adress,
