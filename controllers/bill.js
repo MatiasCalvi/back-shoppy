@@ -3,15 +3,15 @@ const Bill = require("../models/Bill");
 const controller = {
   create: async (req, res, next) => {
     if (req.user.products.length > 0) {
-      req.body = {
+      body = {
         userId: req.user._id,
         date: Date.now(),
         products: req.user.products,
         totalPrice: req.body.totalPrice,
-        coins: req.body.totalPrice * 0.02,
+        coins: req.body.discount ? Math.round(req.body.totalPrice * 0.02) : 0,
       };
       try {
-        let newBill = await Bill.create(req.body);
+        let newBill = await Bill.create(body);
         res.status(201).json({
           response: newBill,
           success: true,
