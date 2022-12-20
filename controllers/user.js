@@ -14,7 +14,6 @@ const jwt = require("jsonwebtoken");
 const controller = {
   register: async (req, res, next) => {
     let {
-      nick,
       name,
       lastName,
       dni,
@@ -34,7 +33,8 @@ const controller = {
     let logged = false;
     let dateOriginal = new Date();
     let coins = 0;
-    let nameDni=''
+    let nameDni='';
+    let nick='';
     function formatoFecha(fecha, formato) {
       const map = {
         dd: fecha.getDate(),
