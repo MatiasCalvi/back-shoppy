@@ -1,13 +1,14 @@
 const joi = require("joi");
 
 const schemaPost = joi.object({
-  nick: joi.string().required().min(3).max(15).messages({
+  nick: joi.any()/* string().required().min(3).max(15).messages({
     "string.base": "Nick tiene que ser texto",
     "any.required": "Nick es requerido",
     "string.empty": "El nick no puede estar vacio",
     "string.min": "Nick tiene que tener al menos 3 caracteres",
     "string.max": "Nick no puede tener mas de 15 caracteres",
-  }),
+  }) */,
+  nameDni:joi.any(),
   name: joi.string().required().min(3).max(15).messages({
     "string.base": "Nombre tiene que ser texto",
     "any.required": "Nombre es requerido",
@@ -66,15 +67,15 @@ const schemaPost = joi.object({
       "string.empty": "El email no puede estar vacio",
       "string.email": "Email tiene que ser un email válido",
     }),
-  phone: joi
-    .string()
+  phone: joi.any()
+    /* .string()
     .required()
     .pattern(/^[0-9]+$/)
     .messages({
       "any.required": "El numero de telefono es requerido",
       "string.base": "El numero de telefono tiene que ser texto",
       "string.pattern.base": "El numero de telefono tienen que ser 0-9 o +",
-    }),
+    }) */,
   password: joi.string().required().min(6).messages({
     "string.base": "La contraseña tiene que ser texto",
     "any.required": "La contraseña es requerido",
@@ -93,6 +94,9 @@ const schemaPost = joi.object({
 });
 
 const schemaPatch = joi.object({
+
+  nameDni: joi.string(),
+
   nick: joi.string().min(3).max(15).messages({
     "string.base": "Nick tiene que ser texto",
     "any.required": "Nick es requerido",
