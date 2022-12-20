@@ -14,14 +14,17 @@ const jwt = require("jsonwebtoken");
 const controller = {
   register: async (req, res, next) => {
     let {
+      nick,
       name,
       lastName,
       dni,
       adress,
+      cp,
       role,
       photo,
       age,
       email,
+      phone,
       password,
       products,
       favorites,
@@ -30,38 +33,43 @@ const controller = {
     let verified = false;
     let logged = false;
     let dateOriginal = new Date();
+    let coins = 0;
 
     function formatoFecha(fecha, formato) {
-          const map = {
-            dd: fecha.getDate(),
-            mm: fecha.getMonth() + 1,
-            yy: fecha.getFullYear().toString().slice(-2),
-            yyyy: fecha.getFullYear()
-        }
+      const map = {
+        dd: fecha.getDate(),
+        mm: fecha.getMonth() + 1,
+        yy: fecha.getFullYear().toString().slice(-2),
+        yyyy: fecha.getFullYear(),
+      };
 
-        return formato.replace(/dd|mm|yy|yyy/gi, matched => map[matched])
+      return formato.replace(/dd|mm|yy|yyy/gi, (matched) => map[matched]);
     }
 
-    let date = formatoFecha(dateOriginal, 'dd/mm/yy');
+    let date = formatoFecha(dateOriginal, "dd/mm/yy");
     password = bcryptjs.hashSync(password, 10);
 
     try {
       await User.create({
+        nick,
         name,
         lastName,
         dni,
         adress,
+        cp,
         role,
         photo,
         age,
         email,
+        phone,
         password,
         code,
         verified,
         logged,
         products,
         favorites,
-        date
+        date,
+        coins,
       });
       await accountVerificationEmail(email, code);
       return userSignedUpResponse(req, res);
@@ -120,7 +128,11 @@ const controller = {
           logged: user.logged,
           products: user.products,
           favorites: user.favorites,
-          date: user.date
+          date: user.date,
+          phone: user.phone,
+          cp: user.cp,
+          nick: user.nick,
+          coins: user.coins,
         };
         return res.status(200).json({
           response: {
@@ -152,7 +164,11 @@ const controller = {
           logged: user.logged,
           products: user.products,
           favorites: user.favorites,
-          date: user.date
+          date: user.date,
+          phone: user.phone,
+          cp: user.cp,
+          nick: user.nick,
+          coins: user.coins,
         },
         succes: true,
         message: "Welcome " + user.name,
@@ -191,6 +207,10 @@ const controller = {
         logged: user.logged,
         products: user.products,
         favorites: user.favorites,
+        phone: user.phone,
+        cp: user.cp,
+        nick: user.nick,
+        coins: user.coins,
       };
       if (user) {
         res.status(200).json({

@@ -13,6 +13,8 @@ const schema = new mongoose.Schema({
       quantity: { type: Number, required: true },
     },
   ],
+  totalPrice: { type: Number, required: true },
+  coins: { type: Number, required: true },
 });
 
 const Bill = mongoose.model("bills", schema);

@@ -2,15 +2,15 @@ const joi = require(`joi`);
 
 const schemaSignIn = joi.object({
   email: joi.string().required().email().messages({
-    "string.required": "Please enter your email",
-    "string.empty": "The field cannot be empty",
+    "string.required": "El email es requerido",
+    "string.empty": "El campo no puede estar vacío",
     "string.email": "Is not a valid email",
-    "string.base": "Only letters and numbers are valid",
+    "string.base": "Solo letras y numeros son válidos",
   }),
   password: joi.string().required().messages({
-    "string.required": "Please enter your password",
-    "string.empty": "The field cannot be empty",
-    "string.base": "Only letters and numbers are valid",
+    "string.required": "La contraseña es requerida",
+    "string.empty": "El campo no puede estar vacío",
+    "string.base": "Solo letras y numeros son válidos",
   }),
 });
 
