@@ -34,7 +34,7 @@ const controller = {
     let logged = false;
     let dateOriginal = new Date();
     let coins = 0;
-    let nameDni=''
+    let nameDni = "";
     function formatoFecha(fecha, formato) {
       const map = {
         dd: fecha.getDate(),
@@ -174,7 +174,7 @@ const controller = {
         },
         succes: true,
         message: "Welcome " + user.name,
-      });
+      }).populate(["products.productId", "favorites"]);;
     } catch (error) {
       next(error);
     }
@@ -195,7 +195,7 @@ const controller = {
   readOne: async (req, res, next) => {
     const { _id } = req.user;
     try {
-      let user = await User.findById({ _id: _id }).populate("products.productId");
+      let user = await User.findById({ _id: _id }).populate(["products.productId", "favorites"]);
       let userAux = {
         name: user.name,
         nameDni: user.coins,
@@ -241,7 +241,7 @@ const controller = {
     try {
       let user = await User.findOneAndUpdate({ _id: _id }, req.body, {
         new: true,
-      }).populate("products.productId");
+      }).populate(["products.productId", "favorites"]);
       if (user) {
         res.status(200).json({
           success: true,
