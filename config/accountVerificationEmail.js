@@ -214,7 +214,7 @@ const accountVerificationEmail = async (email, code) => {
       console.error(error);
       return;
     }
-    console.log("Email sent!");
+
   });
 };
 

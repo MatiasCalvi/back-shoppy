@@ -15,11 +15,10 @@ const schemaPost = joi.object({
     "string.min": "Categoría debe tener al menos 3 caracteres",
     "string.max": "Categoría no puede tener más de 30 caracteres",
   }),
-  photo: joi.string().required().uri().messages({
+  photo: joi.string().required().messages({
     "string.base": "La url tiene que ser texto",
     "any.required": "La url es requerida",
     "string.empty": "La url no tiene que estar vacía",
-    "string.uri": "Tiene que ser una url válida",
   }),
   brand: joi.string().required().min(3).max(30).messages({
     "string.base": "Marca tiene que ser un texto",
@@ -42,7 +41,7 @@ const schemaPost = joi.object({
     "any.required": "Fecha es requerido",
     "string.base": "Fecha tiene que ser un texto",
   }),
-  specifications: joi.object().required().messages({
+  specifications: joi.object().messages({
     "any.required": "Especificaciones es requerido",
     "object.base": "Especificaciones tiene que ser un objeto",
   }),
@@ -63,11 +62,10 @@ const schemaPut = joi.object({
     "string.min": "Categoría debe tener al menos 3 caracteres",
     "string.max": "Categoría no puede tener más de 30 caracteres",
   }),
-  photo: joi.string().uri().messages({
+  photo: joi.string().messages({
     "string.base": "La url tiene que ser texto",
     "any.required": "La url es requerida",
     "string.empty": "La url no tiene que estar vacía",
-    "string.uri": "Tiene que ser una url válida",
   }),
   brand: joi.string().min(3).max(30).messages({
     "string.base": "Marca tiene que ser un texto",
