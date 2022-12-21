@@ -2,7 +2,7 @@ const axios = require("axios");
 
 class PaymentService {
   async createPayment(req,res) {
-    console.log(req.body)
+    console.log(res)
     const url = "https://api.mercadopago.com/checkout/preferences";
 
      /* const body = {
