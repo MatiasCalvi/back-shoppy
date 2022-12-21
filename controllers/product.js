@@ -62,7 +62,6 @@ const controller = {
       };
     }
 
-    
     try {
       let products = await Product.find(query)
         .sort(order)
