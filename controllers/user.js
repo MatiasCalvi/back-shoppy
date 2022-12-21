@@ -87,7 +87,7 @@ const controller = {
         { new: true }
       );
       if (user) {
-        return res.redirect(FRONT_URL);
+        return res.redirect(`${FRONT_URL}ingresar`);
       } else {
         return userNotFoundResponse(req, res);
       }
@@ -195,6 +195,7 @@ const controller = {
   readOne: async (req, res, next) => {
     const { _id } = req.user;
     try {
+
       let user = await User.findById({ _id: _id }).populate(["products.productId", "favorites"]);
       let userAux = {
         name: user.name,
