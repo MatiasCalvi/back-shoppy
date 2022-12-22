@@ -1,4 +1,5 @@
 class PaymentController {
+
     constructor(subscriptionService) {
       this.subscriptionService = subscriptionService;
     }
@@ -15,8 +16,9 @@ class PaymentController {
           .status(500)
           .json({ error: true, msg: "Failed to create payment" });
       }
+
     }
-  
   }
-  
-  module.exports = PaymentController;
+}
+
+module.exports = PaymentController;

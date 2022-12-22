@@ -33,8 +33,8 @@ const controller = {
     let logged = false;
     let dateOriginal = new Date();
     let coins = 0;
-    let nameDni='';
-    let nick='';
+    let nameDni = "";
+    let nick = "";
     function formatoFecha(fecha, formato) {
       const map = {
         dd: fecha.getDate(),
@@ -175,6 +175,7 @@ const controller = {
         succes: true,
         message: "Welcome " + user.name,
       }).populate(["products.productId", "favorites"]);;
+
     } catch (error) {
       next(error);
     }
