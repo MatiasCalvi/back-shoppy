@@ -5,7 +5,7 @@ function passwordUpdateValidation(req, res, next) {
   if (req.body.password) {
     if (bcryptjs.compareSync(req.body.passwordCurrent, req.user.password)) {
       delete req.body.passwordCurrent;
-      console.log(req.body);
+   /*    console.log(req.body); */
       return next();
     } else {
       return passwordNotMatch(req, res);

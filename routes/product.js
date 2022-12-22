@@ -28,7 +28,6 @@ router
   .put(
     validator(schemaPut),
     passport.authenticate("jwt", { session: false }),
-    isAdmin,
     update
   )
   .delete(passport.authenticate("jwt", { session: false }), isAdmin, destroy);
