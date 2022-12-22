@@ -152,31 +152,30 @@ const controller = {
   loginWithToken: async (req, res, next) => {
     let { user } = req;
     try {
-      return res
-        .json({
-          response: {
-            name: user.name,
-            lastName: user.lastName,
-            dni: user.dni,
-            adress: user.adress,
-            role: user.role,
-            photo: user.photo,
-            age: user.age,
-            email: user.email,
-            logged: user.logged,
-            products: user.products,
-            favorites: user.favorites,
-            date: user.date,
-            phone: user.phone,
-            cp: user.cp,
-            nick: user.nick,
-            coins: user.coins,
-            nameDni: user.nameDni,
-          },
-          succes: true,
-          message: "Welcome " + user.name,
-        })
-        .populate(["products.productId", "favorites"]);
+      return res.json({
+        response: {
+          name: user.name,
+          lastName: user.lastName,
+          dni: user.dni,
+          adress: user.adress,
+          role: user.role,
+          photo: user.photo,
+          age: user.age,
+          email: user.email,
+          logged: user.logged,
+          products: user.products,
+          favorites: user.favorites,
+          date: user.date,
+          phone: user.phone,
+          cp: user.cp,
+          nick: user.nick,
+          coins: user.coins,
+          nameDni: user.nameDni,
+        },
+        succes: true,
+        message: "Welcome " + user.name,
+      }).populate(["products.productId", "favorites"]);;
+
     } catch (error) {
       next(error);
     }
