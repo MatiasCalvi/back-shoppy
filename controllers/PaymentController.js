@@ -16,9 +16,7 @@ class PaymentController {
           .status(500)
           .json({ error: true, msg: "Failed to create payment" });
       }
-
     }
-  }
 }
 
 module.exports = PaymentController;
