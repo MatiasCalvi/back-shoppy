@@ -191,6 +191,11 @@ const schemaPatch = joi.object({
     "any.required": "Favoritos es requerido",
     "array.base": "Favoritos tiene que ser un arreglo",
   }),
+  coins: joi.number().messages({
+    "number.base": "Monedas tiene que ser un número",
+    "any.required": "Monedas es requerido",
+    "number.empty": "Monedas no puede estar vacia",    
+  }),
 });
 
 module.exports = { schemaPost, schemaPatch };
