@@ -197,10 +197,8 @@ const controller = {
   readOne: async (req, res, next) => {
     const { _id } = req.user;
     try {
-      let user = await User.findById({ _id: _id }).populate([
-        "products.productId",
-        "favorites",
-      ]);
+
+      let user = await User.findById({ _id: _id }).populate(["products.productId", "favorites"]);
       let userAux = {
         name: user.name,
         nameDni: user.coins,
