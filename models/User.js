@@ -18,6 +18,7 @@ const schema = new mongoose.Schema({
   verified: { type: Boolean, required: true },
   logged: { type: Boolean, required: true },
   date: { type: String },
+  aprove: { type: Boolean,required: true },
   products: {
     type: [
       {

@@ -35,6 +35,7 @@ const controller = {
     let coins = 0;
     let nameDni = "";
     let nick = "";
+    let aprove=false;
     function formatoFecha(fecha, formato) {
       const map = {
         dd: fecha.getDate(),
@@ -71,6 +72,7 @@ const controller = {
         favorites,
         date,
         coins,
+        aprove
       });
       await accountVerificationEmail(email, code);
       return userSignedUpResponse(req, res);
@@ -113,6 +115,7 @@ const controller = {
             photo: userDb.photo,
             role: user.role,
             logged: userDb.logged,
+            aprove: userDb.aprove
           },
           process.env.KEY_JWT,
           { expiresIn: 60 * 60 * 24 }
@@ -134,6 +137,7 @@ const controller = {
           cp: user.cp,
           nick: user.nick,
           coins: user.coins,
+          aprove: user.aprove
         };
         return res.status(200).json({
           response: {
@@ -171,6 +175,7 @@ const controller = {
           nick: user.nick,
           coins: user.coins,
           nameDni: user.nameDni,
+          aprove: user.aprove
         },
         succes: true,
         message: "Welcome " + user.name,
@@ -216,6 +221,7 @@ const controller = {
         cp: user.cp,
         nick: user.nick,
         coins: user.coins,
+        aprove: user.aprove
       };
       if (user) {
         res.status(200).json({
